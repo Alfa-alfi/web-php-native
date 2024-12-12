@@ -2,43 +2,36 @@
 // Termasuk file konfigurasi
 include("../koneksi.php");
 
-// Mengambil lagu_id lagu dari parameter URL 
-$lagu_id= $_GET['lagu_id']; 
+// Mengambil ID lagu dari parameter URL 
+$id = $_GET['pengguna_id']; 
 
-    // Mengambil data lagu dari database berdasarkan lagu_id
-    $query = $db->query("SELECT * FROM lagu WHERE lagu_id = '$lagu_id'");
-    $lagu = $query->fetch_assoc();
+    // Mengambil data lagu dari database berdasarkan ID
+    $query = $db->query("SELECT * FROM Pengguna WHERE pengguna_id = '$id'");
+    $pengguna = $query->fetch_assoc();
     ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>EDIT DATA MUSIC STREAMING</title>
+    <title>EDIT DATA PENGGUNA</title>
 </head>
 <body>
-    <h3>Edit Lagu</h3>
+    <h3>Edit Data Pengguna</h3>
     <form action="proses-edit.php" method="POST">
-        <!-- Menyimpan lagu_id untuk proses selanjutnya -->
-        <input type="hidden" name="lagu_id" value="<?php echo $lagu['lagu_id']; ?>">
+        <!-- Menyimpan ID untuk proses selanjutnya -->
+        <input type="hidden" name="pengguna_id" value="<?php echo $pengguna['pengguna_id']; ?>">
         <table border="0">
             <tr>
-                <td>Judul Lagu</td>
+                <td>username</td>
                 <td>
-                    <input type="text" name="judul_lagu" 
-                    value="<?php echo $lagu['judul_lagu']; ?>" required>
+                    <input type="text" name="username" 
+                    value="<?php echo $pengguna['username']; ?>" required>
                 </td>
             </tr>
             <tr>
-                <td>Artis</td>
+                <td>email</td>
                 <td>
-                    <input type="text" name="artis" 
-                    value="<?php echo $lagu['artis']; ?>" required>
-                </td>
-            </tr>
-            <tr>
-                <td>Durasi</td>
-                <td>
-                    <input type="text" name="durasi" 
-                    value="<?php echo $lagu['durasi']; ?>" required>
+                    <input type="text" name="email" 
+                    value="<?php echo $pengguna['email']; ?>" required>
                 </td>
             </tr>
         </table>
