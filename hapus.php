@@ -2,26 +2,26 @@
 session_start(); 
 include("../koneksi.php");
 
-// Periksa apakah ada lagu_id yang di kirim melalui URL
-if (isset($_GET['lagu_id'])) {
-    // Ambil lagu_id dari URL
-    $id = $_GET['lagu_id'];
+// Periksa apakah ada ID yang di kirim melalui URL
+if (isset($_GET['pengguna_id'])) {
+    // Ambil ID dari URL
+    $id = $_GET['pengguna_id'];
 
-    // Buat query untuk menghapus data siswa berdasarkan lagu_id
-    $sql = "DELETE FROM lagu WHERE lagu_id=$id";
+    // Buat query untuk menghapus data siswa berdasarkan ID
+    $sql = "DELETE FROM pengguna WHERE pengguna_id=$id";
     $query = mysqli_query($db, $sql);
 
     // Simpan pesan notifikasi dalam sesi bedasarkan hasil query
     if ($query) {
-        $_SESSION['notifikasi'] = "Lagu berhasil dihapus!";
+        $_SESSION['notifikasi'] = "Pengguna berhasil dihapus!";
     } else {
-        $_SESSION['notifikasi'] = "Lagu gagal dihapus!";
+        $_SESSION['notifikasi'] = "Pengguna gagal dihapus!";
     }
 
     // Alihkan ke halaman index.php
     header('Location: index.php');
 } else {
-    // Jika akses langsung tanpa lagu_id, tampilkan pesan error
+    // Jika akses langsung tanpa ID, tampilkan pesan error
     die("Akses ditolak...");
 }
 ?>
