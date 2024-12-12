@@ -16,14 +16,13 @@ session_start();
         </style>
     </head>
     <body>
-
+        
         <ul class="navlist">
-            <li><a href="index.php">Pengguna</a>
-            </li>
-            <li><a href="../lagu/index.php">Lagu</a></li>
+            <li><a href="index.php">Lagu</a></li>
+            <li><a href="../pengguna/index.php">Pengguna</a></li>
         </ul>
 
-        <h2>Data Pengguna</h2>
+        <h2>Data Lagu</h2>
         <?php if (isset($_SESSION['notifikasi'])): ?>
             <p><?php echo $_SESSION['notifikasi']; ?></p>
             <?php unset($_SESSION['notifikasi']); ?>
@@ -32,30 +31,32 @@ session_start();
         <thead> 
             <tr align="center">
                 <th>#</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th><a href="form-tambah.php">Tambah Pengguna</a></th>
+                <th>Judul Lagu</th>
+                <th>Artis</th>
+                <th>Durasi</th>
+                <th><a href="form-tambah.php">Tambah Lagu</a></th>
              </tr>
         </thead>
         <tbody>
             <?php
             $no = 1; //membuat penomoran data dari 1
             //membuat variable untuk menjalankan query SQL
-            $query = $db->query("SELECT * FROM pengguna");
-            //perulangan while akan terus berjalan (menampilkan data)selama kondisi $queery bernilai true (adanya data pada table pengguna)
-            while ($pengguna = $query->fetch_assoc()){
+            $query = $db->query("SELECT * FROM lagu");
+            //perulangan while akan terus berjalan (menampilkan data)selama kondisi $queery bernilai true (adanya data pada table lagu)
+            while ($lagu = $query->fetch_assoc()){
                 //fungsi fetch_assoc digunakan untuk mengambil data perulangan dalam bentuk array
             ?>
             <tr>
                 <td><?php echo $no++ ?></td>
-                <td><?php echo $pengguna['username'] ?></td>
-                <td><?php echo $pengguna['email'] ?></td>
+                <td><?php echo $lagu['judul_lagu'] ?></td>
+                <td><?php echo $lagu['artis'] ?></td>
+                <td><?php echo $lagu['durasi'] ?></td>
                 <td align="center">
                     <!-- URL ke halaman edit data dengan menggunakan parameter id pada kolom table -->
-                    <a href="form-edit.php?pengguna_id=<?php echo $pengguna['pengguna_id'] ?>">Edit</a>
+                    <a href="form-edit.php?lagu_id=<?php echo $lagu['lagu_id'] ?>">Edit</a>
                      <!-- URL untuk menghapus data dengan menggunakan parameter id pada kolom table dan alert confirmasi hapus data-->
                     <a onclick="return confirm('Anda yakin ingin menghapus data?')"
-                    href="hapus.php?pengguna_id=<?php echo $pengguna['pengguna_id'] ?>">Hapus</a>
+                    href="hapus.php?lagu_id=<?php echo $lagu['lagu_id'] ?>">Hapus</a>
                 </td> 
              </tr>
              <?php
@@ -63,7 +64,7 @@ session_start();
             ?>
         </tbody>
     </table>
-    <!-- menghitung jumlah baris yang ada pada table (pengguna) -->
+    <!-- menghitung jumlah baris yang ada pada table (lagu) -->
     <p>Total: <?php echo mysqli_num_rows($query) ?></p>
 </body>
 </html>
